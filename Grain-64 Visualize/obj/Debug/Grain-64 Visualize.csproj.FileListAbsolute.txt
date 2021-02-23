@@ -1,0 +1,10 @@
+C:\Users\Artem\source\repos\Grain-64 Visualize\bin\Debug\Grain-64 Visualize.exe.config
+C:\Users\Artem\source\repos\Grain-64 Visualize\bin\Debug\Grain-64 Visualize.exe
+C:\Users\Artem\source\repos\Grain-64 Visualize\bin\Debug\Grain-64 Visualize.pdb
+C:\Users\Artem\source\repos\Grain-64 Visualize\obj\Debug\Grain-64 Visualize.csprojAssemblyReference.cache
+C:\Users\Artem\source\repos\Grain-64 Visualize\obj\Debug\Grain_64_Visualize.Form1.resources
+C:\Users\Artem\source\repos\Grain-64 Visualize\obj\Debug\Grain_64_Visualize.Properties.Resources.resources
+C:\Users\Artem\source\repos\Grain-64 Visualize\obj\Debug\Grain-64 Visualize.csproj.GenerateResource.cache
+C:\Users\Artem\source\repos\Grain-64 Visualize\obj\Debug\Grain-64 Visualize.csproj.CoreCompileInputs.cache
+C:\Users\Artem\source\repos\Grain-64 Visualize\obj\Debug\Grain-64 Visualize.exe
+C:\Users\Artem\source\repos\Grain-64 Visualize\obj\Debug\Grain-64 Visualize.pdb
