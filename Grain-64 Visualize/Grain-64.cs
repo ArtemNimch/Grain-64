@@ -66,7 +66,7 @@ namespace Grain_64_Visualize
                 c1 = c2;
             }
 
-            /* now the h function */
+            /* h function */
             int x0 = S(3);
             int x1 = S(25);
             int x2 = S(46);

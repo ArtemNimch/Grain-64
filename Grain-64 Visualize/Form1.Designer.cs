@@ -50,7 +50,8 @@
             this.Keystream_label = new System.Windows.Forms.Label();
             this.OpenText_label = new System.Windows.Forms.Label();
             this.ChiperText_label = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.chiperTextBox = new System.Windows.Forms.TextBox();
+            this.h_label = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -149,7 +150,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1230, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1230, 30);
             this.menuStrip1.TabIndex = 9;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -158,7 +159,7 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // openToolStripMenuItem
@@ -229,19 +230,29 @@
             this.ChiperText_label.TabIndex = 15;
             this.ChiperText_label.Text = "Chiper text: ";
             // 
-            // textBox3
+            // chiperTextBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(101, 371);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(1117, 22);
-            this.textBox3.TabIndex = 16;
+            this.chiperTextBox.Location = new System.Drawing.Point(101, 371);
+            this.chiperTextBox.Name = "chiperTextBox";
+            this.chiperTextBox.Size = new System.Drawing.Size(1117, 22);
+            this.chiperTextBox.TabIndex = 16;
+            // 
+            // h_label
+            // 
+            this.h_label.AutoSize = true;
+            this.h_label.Location = new System.Drawing.Point(534, 220);
+            this.h_label.Name = "h_label";
+            this.h_label.Size = new System.Drawing.Size(45, 17);
+            this.h_label.TabIndex = 17;
+            this.h_label.Text = "h(i) = ";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1230, 481);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.h_label);
+            this.Controls.Add(this.chiperTextBox);
             this.Controls.Add(this.ChiperText_label);
             this.Controls.Add(this.OpenText_label);
             this.Controls.Add(this.Keystream_label);
@@ -292,7 +303,8 @@
         private System.Windows.Forms.Label Keystream_label;
         private System.Windows.Forms.Label OpenText_label;
         private System.Windows.Forms.Label ChiperText_label;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox chiperTextBox;
+        private System.Windows.Forms.Label h_label;
     }
 }
 

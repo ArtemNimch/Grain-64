@@ -21,8 +21,10 @@ namespace Grain_64_Visualize
         public byte[] key;
         public byte[] openText;
         public byte[] keyStream;
+        public byte[] chiperText;
         string key_str;
         Grain_64 grain;
+        public int h;
 
         public Form1()
         {
@@ -36,9 +38,11 @@ namespace Grain_64_Visualize
         {
             key = new byte[16] { 8, 4, 5, 6, 6, 6, 1, 6, 2, 6, 8, 6, 5, 4, 3, 12 };
             openText = new byte[26] { 49, 50, 32, 52, 54, 32, 51, 52, 32, 56, 57, 32, 56, 48, 32, 52, 53, 32, 54, 51, 32, 56, 50, 32, 55, 49 };
+            chiperText = new byte[openText.Length];
+            keyStream = new byte[openText.Length];
             loadKey();
             loadOpenText();
-            keyStream = new byte[openText.Length];
+
         }
 
         void loadKey()
@@ -66,7 +70,10 @@ namespace Grain_64_Visualize
                 key = key,
                 lfsr = key.Take(key.Length / 2).ToArray(),
                 nfsr = key.Skip(key.Length / 2).ToArray()
-            };         
+            };
+            chiperText = new byte[openText.Length];
+            keyStream = new byte[openText.Length];
+
             grain.Init();
             backgroundWorker1.WorkerSupportsCancellation = true;
             if (backgroundWorker1.WorkerSupportsCancellation)
@@ -82,12 +89,15 @@ namespace Grain_64_Visualize
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            for (i = 0; i < openText.Length; i++)
+            for (i = 0; i < openText.Length*8; i++)
             {
-                int h = Convert.ToInt32(grain.Enc());
+                h = Convert.ToInt32(grain.Enc());
                 int ha = h << (7 - (i % 8));
-               // int b = 1 << 5;/////////////////////////////////!!!!!!!!!!!!?//////////////////
-                keyStream[7 - (i / 8)] = Convert.ToByte(ha);//??
+                keyStream[i / 8] = Convert.ToByte(Convert.ToInt32(keyStream[i / 8]) ^ ha);//??
+
+                if (i % 8 == 7)
+                    chiperText[i/8] = Convert.ToByte(Convert.ToInt32(openText[i/8]) ^ Convert.ToInt32(keyStream[i/8]));
+
                 Thread.Sleep(1000);
                 while(!_working)
                     Thread.Sleep(1000);
@@ -111,6 +121,12 @@ namespace Grain_64_Visualize
             for (int i = 0; i < keyStream.Length; i++)
                 keystream_str += Convert.ToString(keyStream[i], 2).PadLeft(8, '0') + "  ";
             KeyStreamTextBox.Text = keystream_str;
+            h_label.Text = "h(i) = " + h.ToString();
+
+            string chiper_str = "";
+            for (int i = 0; i < chiperText.Length; i++)
+                chiper_str += Convert.ToString(chiperText[i], 2).PadLeft(8, '0') + "  ";
+            chiperTextBox.Text = chiper_str;
         }
 
         private void Stop_button_Click(object sender, EventArgs e)
