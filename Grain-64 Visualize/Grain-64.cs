@@ -28,37 +28,48 @@ namespace Grain_64_Visualize
             int b = (nfsr[7 - (i / 8)]) >> (7 - (i % 8)); ;
             return b;
         }
+        public int BuildPolynom(List<object> s,bool func)/*func - S()=false или B()=true*/
+        {
+            int a=0;
+            for (int i = 0; i < s.Count; i++)
+            {
+                if (s[i] is Byte)
+                    if (func == false)
+                        a ^= S((byte)s[i]);
+                    else
+                        a ^= B((byte)s[i]);
+                if (s[i] is List<byte>)
+                {
+                    int b=0;
+                    for (int j = 0; j < ((List<byte>)s[i]).Count; j++)
+                        b &= B(((List<byte>)s[i])[j]);
+                    a ^= b;
+                }
+            }
+            return a;
+        }
         public byte Enc()
         {
             int s64, s0, c1, c2;
             s0 = S(0);
-            s64 = S(62) ^ S(51) ^ S(38) ^ S(23) ^ S(13) ^ s0;
+            //s64 = S(62) ^ S(51) ^ S(38) ^ S(23) ^ S(13) ^ s0;
+            s64 = BuildPolynom(new List<object> { 62, 51, 38, 23, 13, 0 }, false);
             s64 &= 1;
             c1 = s64;
             for (int i = 0; i < 8; i++)
             {
                 c2 = (lfsr[i]) >> 7;
-                lfsr[i] = Convert.ToByte( (((lfsr[i]) << 1) | c1)%256);
+                lfsr[i] = Convert.ToByte((((lfsr[i]) << 1) | c1) % 256);
                 c1 = c2;
             }
-            int b80, a,b,d,e;
-            b80 = B(62) ^ B(60) ^ B(52) ^ B(45) ^
-                B(37) ^ B(33) ^ B(28) ^ B(21) ^
-                B(14) ^ B(9) ^ B(0) ^ s0;
-            b80 ^= (a = B(63) & B(60));
-            b80 ^= (b = B(37) & B(33));
-            b80 ^= B(15) & B(9);
-            b80 ^= (d = B(60) & B(52) & B(45));
-            b80 ^= (e = B(33) & B(28) & B(21));
-            b80 ^= B(63) & B(45) & B(28) & B(9);
-                                                 
-            b80 ^= b & B(60) & B(52);
-            b80 ^= a & B(21) & B(15);
-            b80 ^= d & B(63) & B(37); 
-            b80 ^= e & B(15) & B(9); 
-            b80 ^= e & B(52) & B(45) & B(37);
+            int b64, a, b, d, e;
+            b64 = BuildPolynom(new List<object> {62,60,52,45,37,33,28,21,14,9,0,new List<object> {63,60},
+                new List<object> { 37, 33 },new List<object> {15,9},new List<object> {60,52,45} ,
+                new List<object> { 33, 28, 21 }, new List<object> { 63, 45, 28, 9 }, new List<object> {37,33,60,52},
+            new List<object> {63,60,21,15},new List<object> {60,52,45,63,37},new List<object> {33,28,21,15,9},
+            new List<object> {33,28,21,52,45,37}}, true)^s0;
 
-            c1 = b80 & 1;
+            c1 = b64 & 1;
             for (int i = 0; i < 8; ++i)
             {
                 c2 = (nfsr[i]) >> 7;

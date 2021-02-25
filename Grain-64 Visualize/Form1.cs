@@ -22,7 +22,6 @@ namespace Grain_64_Visualize
         public byte[] openText;
         public byte[] keyStream;
         public byte[] chiperText;
-        string key_str;
         Grain_64 grain;
         public int h;
 
@@ -42,22 +41,38 @@ namespace Grain_64_Visualize
             keyStream = new byte[openText.Length];
             loadKey();
             loadOpenText();
-
         }
 
         void loadKey()
         {
-            key_str = "";
-            for (int i = 0; i < key.Length; i++)
-                key_str += Convert.ToString(key[i], 2).PadLeft(8, '0') + "  ";
-            Key.Text = key_str;
+            ByteToText(key, Key);
         }
         void loadOpenText()
         {
-            string openText_str = "";
-            for (int i = 0; i < openText.Length; i++)
-                openText_str += Convert.ToString(openText[i], 2).PadLeft(8, '0') + "  ";
-            OpenTextbox.Text = openText_str;
+            ByteToText(openText, OpenTextbox);
+        }
+        void loadLFSR()
+        {
+            ByteToText(grain.lfsr, LFSR);
+        }
+        void loadNFSR()
+        {
+            ByteToText(grain.nfsr, NFSR);
+        }
+        void loadKeyStream()
+        {
+            ByteToText(keyStream, KeyStreamTextBox);
+        }
+        void loadChiperText()
+        {
+            ByteToText(chiperText, chiperTextBox);
+        }
+        void ByteToText(byte[] Bt, TextBox txb)
+        {
+            string str = "";
+            for (int i = 0; i < Bt.Length; i++)
+                str += Convert.ToString(Bt[i], 2).PadLeft(8, '0') + "  ";
+            txb.Text = str;
         }
         private void Start_button_Click(object sender, EventArgs e)
         {
@@ -107,26 +122,13 @@ namespace Grain_64_Visualize
         private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
             label1.Text = "Iteration: " + e.ProgressPercentage.ToString();
-            string lfsr_str = "";
-            for (int i = 0; i < grain.lfsr.Length; i++)
-                lfsr_str += Convert.ToString(grain.lfsr[i], 2).PadLeft(8, '0') + "  ";
-            LFSR.Text = lfsr_str;
 
-            string nfsr_str = "";
-            for (int i = 0; i < grain.nfsr.Length; i++)
-                nfsr_str += Convert.ToString(grain.nfsr[i], 2).PadLeft(8, '0') + "  ";
-            NFSR.Text = nfsr_str;
-
-            string keystream_str = "";
-            for (int i = 0; i < keyStream.Length; i++)
-                keystream_str += Convert.ToString(keyStream[i], 2).PadLeft(8, '0') + "  ";
-            KeyStreamTextBox.Text = keystream_str;
+            loadLFSR();
+            loadNFSR();
+            loadKeyStream();
             h_label.Text = "h(i) = " + h.ToString();
 
-            string chiper_str = "";
-            for (int i = 0; i < chiperText.Length; i++)
-                chiper_str += Convert.ToString(chiperText[i], 2).PadLeft(8, '0') + "  ";
-            chiperTextBox.Text = chiper_str;
+            loadChiperText();
         }
 
         private void Stop_button_Click(object sender, EventArgs e)
@@ -187,6 +189,11 @@ namespace Grain_64_Visualize
 
             loadOpenText();
             keyStream = new byte[openText.Length];
+        }
+
+        private void PolynomsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

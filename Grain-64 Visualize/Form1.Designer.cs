@@ -52,6 +52,8 @@
             this.ChiperText_label = new System.Windows.Forms.Label();
             this.chiperTextBox = new System.Windows.Forms.TextBox();
             this.h_label = new System.Windows.Forms.Label();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.polynomsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -147,10 +149,11 @@
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.settingsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1230, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(1230, 28);
             this.menuStrip1.TabIndex = 9;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -159,7 +162,7 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // openToolStripMenuItem
@@ -246,6 +249,21 @@
             this.h_label.TabIndex = 17;
             this.h_label.Text = "h(i) = ";
             // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.polynomsToolStripMenuItem});
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            // 
+            // polynomsToolStripMenuItem
+            // 
+            this.polynomsToolStripMenuItem.Name = "polynomsToolStripMenuItem";
+            this.polynomsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.polynomsToolStripMenuItem.Text = "Polynoms";
+            this.polynomsToolStripMenuItem.Click += new System.EventHandler(this.PolynomsToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -305,6 +323,8 @@
         private System.Windows.Forms.Label ChiperText_label;
         private System.Windows.Forms.TextBox chiperTextBox;
         private System.Windows.Forms.Label h_label;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem polynomsToolStripMenuItem;
     }
 }
 
