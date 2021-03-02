@@ -25,7 +25,7 @@ namespace Grain_64_Visualize
         }
         public int B(byte i)
         {
-            int b = (nfsr[7 - (i / 8)]) >> (7 - (i % 8)); ;
+            int b = (nfsr[7 - (i / 8)]) >> (7 - (i % 8)); 
             return b;
         }
         public int BuildPolynom(List<object> s,bool func)/*func - S()=false или B()=true*/
@@ -59,10 +59,10 @@ namespace Grain_64_Visualize
             for (int i = 0; i < 8; i++)
             {
                 c2 = (lfsr[i]) >> 7;
-                lfsr[i] = Convert.ToByte((((lfsr[i]) << 1) | c1) % 256);
+                lfsr[i] = Convert.ToByte((((lfsr[i]) << 1)%256 | c1));
                 c1 = c2;
             }
-            int b64, a, b, d, e;
+            int b64;
             b64 = BuildPolynom(new List<object> {62,60,52,45,37,33,28,21,14,9,0,new List<object> {63,60},
                 new List<object> { 37, 33 },new List<object> {15,9},new List<object> {60,52,45} ,
                 new List<object> { 33, 28, 21 }, new List<object> { 63, 45, 28, 9 }, new List<object> {37,33,60,52},
@@ -73,7 +73,7 @@ namespace Grain_64_Visualize
             for (int i = 0; i < 8; ++i)
             {
                 c2 = (nfsr[i]) >> 7;
-                nfsr[i] = Convert.ToByte((((nfsr[i]) << 1) | c1) % 256);
+                nfsr[i] = Convert.ToByte((((nfsr[i]) << 1)%256 | c1));
                 c1 = c2;
             }
 

@@ -17,6 +17,7 @@ namespace Grain_64_Visualize
     {
         private bool _working;
         private bool _isOn;
+        private int c = -1;
         public int i;
         public byte[] key;
         public byte[] openText;
@@ -24,6 +25,7 @@ namespace Grain_64_Visualize
         public byte[] chiperText;
         Grain_64 grain;
         public int h;
+        string outFileName;
 
         public Form1()
         {
@@ -32,6 +34,10 @@ namespace Grain_64_Visualize
             backgroundWorker1.DoWork += backgroundWorker1_DoWork;
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             backgroundWorker1.WorkerReportsProgress = true;
+
+
+            openFileDialog1.InitialDirectory = System.IO.Path.Combine(Application.StartupPath, @"Keys");
+            openFileDialog2.InitialDirectory = System.IO.Path.Combine(Application.StartupPath, @"OpenText");
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -71,13 +77,15 @@ namespace Grain_64_Visualize
         {
             string str = "";
             for (int i = 0; i < Bt.Length; i++)
-                str += Convert.ToString(Bt[i], 2).PadLeft(8, '0') + "  ";
+                str += Convert.ToString(Bt[i], 2).PadLeft(8, '0');
             txb.Text = str;
         }
         private void Start_button_Click(object sender, EventArgs e)
         {
+            c = -1;
             _working = true;
             Stop_button.Enabled = true;
+            Step_button.Enabled = true;
             _isOn = true;
             Stop_button.Text = "Stop";
             grain = new Grain_64
@@ -91,6 +99,8 @@ namespace Grain_64_Visualize
 
             grain.Init();
             backgroundWorker1.WorkerSupportsCancellation = true;
+            loadLFSR();
+            loadNFSR();
             if (backgroundWorker1.WorkerSupportsCancellation)
             {
                 backgroundWorker1.CancelAsync();
@@ -98,8 +108,10 @@ namespace Grain_64_Visualize
             }
             if (!backgroundWorker1.IsBusy)
             {
-                backgroundWorker1.RunWorkerAsync();             
+                backgroundWorker1.RunWorkerAsync();
+                i = 0;
             }
+            
         }
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -111,17 +123,38 @@ namespace Grain_64_Visualize
                 keyStream[i / 8] = Convert.ToByte(Convert.ToInt32(keyStream[i / 8]) ^ ha);//??
 
                 if (i % 8 == 7)
-                    chiperText[i/8] = Convert.ToByte(Convert.ToInt32(openText[i/8]) ^ Convert.ToInt32(keyStream[i/8]));
+                {
+                    chiperText[i / 8] = Convert.ToByte(Convert.ToInt32(openText[i / 8]) ^ Convert.ToInt32(keyStream[i / 8]));
+                    if (outFileName != null)
+                    {
+                        try
+                        {
+                            using (FileStream fs = new FileStream(outFileName, FileMode.Append, FileAccess.Write))
+                            {
+                                fs.WriteByte(chiperText[i / 8]);
+                            }
+                        }
+                        catch (IOException exp)
+                        {
+                            MessageBox.Show(exp.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        }
+                    }
+                }
 
                 Thread.Sleep(1000);
                 while(!_working)
                     Thread.Sleep(1000);
-                backgroundWorker1.ReportProgress(i);
+
+                while( c==i-1 && c!=-1)
+                    Thread.Sleep(1000);
+
+                backgroundWorker1.ReportProgress(i+1);
             }
+
         }
         private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
-            label1.Text = "Iteration: " + e.ProgressPercentage.ToString();
+            label1.Text = "Iteration: " + (e.ProgressPercentage).ToString();
 
             loadLFSR();
             loadNFSR();
@@ -144,7 +177,15 @@ namespace Grain_64_Visualize
                 _working = true;
                 _isOn = true;
                 Stop_button.Text = "Stop";
+                c = -1;
             }
+        }
+
+        private void Step_button_Click(object sender, EventArgs e)
+        {
+            _working = true;
+            _isOn = true;
+            c = i;
         }
 
         private void KeyOpenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -154,9 +195,9 @@ namespace Grain_64_Visualize
                 string fileName = openFileDialog1.FileName;
                 try
                 {
-                    string[] file_txt = File.ReadAllText(fileName).Split(' ');
+                    byte[] file_byte = File.ReadAllBytes(fileName);
                     for (int i = 0; i < key.Length; i++)
-                        key[i] = Convert.ToByte(file_txt[i]);
+                        key[i] = file_byte[i];
                     loadKey();
                 }
                 catch (IOException exp)
@@ -169,9 +210,9 @@ namespace Grain_64_Visualize
 
         private async void FileToolStripMenuItem1_ClickAsync(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (openFileDialog2.ShowDialog() == DialogResult.OK)
             {
-                string fileName = openFileDialog1.FileName;
+                string fileName = openFileDialog2.FileName;
                 try
                 {
                     using (FileStream SourceStream = File.Open(fileName, FileMode.Open))
@@ -186,7 +227,14 @@ namespace Grain_64_Visualize
                 }
 
             }
-
+            
+            outFileName = System.IO.Path.Combine(openFileDialog2.InitialDirectory, openFileDialog2.FileName.Split('.')[0] + "_out.txt");
+            try
+            {
+                File.Delete(outFileName);
+                File.Create(outFileName).Dispose();
+            }
+            catch { }
             loadOpenText();
             keyStream = new byte[openText.Length];
         }
@@ -195,5 +243,7 @@ namespace Grain_64_Visualize
         {
 
         }
+
+
     }
 }

@@ -52,8 +52,7 @@
             this.ChiperText_label = new System.Windows.Forms.Label();
             this.chiperTextBox = new System.Windows.Forms.TextBox();
             this.h_label = new System.Windows.Forms.Label();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.polynomsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Step_button = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,21 +60,21 @@
             // 
             this.Key.Location = new System.Drawing.Point(58, 70);
             this.Key.Name = "Key";
-            this.Key.Size = new System.Drawing.Size(1161, 22);
+            this.Key.Size = new System.Drawing.Size(1040, 22);
             this.Key.TabIndex = 0;
             // 
             // NFSR
             // 
-            this.NFSR.Location = new System.Drawing.Point(15, 150);
+            this.NFSR.Location = new System.Drawing.Point(16, 150);
             this.NFSR.Name = "NFSR";
-            this.NFSR.Size = new System.Drawing.Size(580, 22);
+            this.NFSR.Size = new System.Drawing.Size(521, 22);
             this.NFSR.TabIndex = 1;
             // 
             // LFSR
             // 
-            this.LFSR.Location = new System.Drawing.Point(639, 150);
+            this.LFSR.Location = new System.Drawing.Point(576, 150);
             this.LFSR.Name = "LFSR";
-            this.LFSR.Size = new System.Drawing.Size(580, 22);
+            this.LFSR.Size = new System.Drawing.Size(521, 22);
             this.LFSR.TabIndex = 2;
             // 
             // Key_label
@@ -91,7 +90,7 @@
             // 
             this.LFSR_label.AutoSize = true;
             this.LFSR_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LFSR_label.Location = new System.Drawing.Point(918, 118);
+            this.LFSR_label.Location = new System.Drawing.Point(818, 118);
             this.LFSR_label.Name = "LFSR_label";
             this.LFSR_label.Size = new System.Drawing.Size(74, 29);
             this.LFSR_label.TabIndex = 4;
@@ -111,7 +110,7 @@
             // 
             this.Start_button.BackColor = System.Drawing.Color.Lime;
             this.Start_button.Font = new System.Drawing.Font("Bahnschrift Condensed", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Start_button.Location = new System.Drawing.Point(520, 430);
+            this.Start_button.Location = new System.Drawing.Point(420, 430);
             this.Start_button.Name = "Start_button";
             this.Start_button.Size = new System.Drawing.Size(75, 39);
             this.Start_button.TabIndex = 6;
@@ -133,7 +132,7 @@
             this.Stop_button.BackColor = System.Drawing.Color.Red;
             this.Stop_button.Enabled = false;
             this.Stop_button.Font = new System.Drawing.Font("Bahnschrift Condensed", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Stop_button.Location = new System.Drawing.Point(639, 430);
+            this.Stop_button.Location = new System.Drawing.Point(514, 430);
             this.Stop_button.Name = "Stop_button";
             this.Stop_button.Size = new System.Drawing.Size(80, 39);
             this.Stop_button.TabIndex = 8;
@@ -144,16 +143,16 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "|*.key;";
             // 
             // menuStrip1
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.settingsToolStripMenuItem});
+            this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1230, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1109, 28);
             this.menuStrip1.TabIndex = 9;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -162,7 +161,7 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // openToolStripMenuItem
@@ -191,19 +190,20 @@
             // openFileDialog2
             // 
             this.openFileDialog2.FileName = "openFileDialog2";
+            this.openFileDialog2.Filter = "|*.txt";
             // 
             // KeyStreamTextBox
             // 
             this.KeyStreamTextBox.Location = new System.Drawing.Point(101, 272);
             this.KeyStreamTextBox.Name = "KeyStreamTextBox";
-            this.KeyStreamTextBox.Size = new System.Drawing.Size(1117, 22);
+            this.KeyStreamTextBox.Size = new System.Drawing.Size(996, 22);
             this.KeyStreamTextBox.TabIndex = 10;
             // 
             // OpenTextbox
             // 
             this.OpenTextbox.Location = new System.Drawing.Point(101, 318);
             this.OpenTextbox.Name = "OpenTextbox";
-            this.OpenTextbox.Size = new System.Drawing.Size(1117, 22);
+            this.OpenTextbox.Size = new System.Drawing.Size(997, 22);
             this.OpenTextbox.TabIndex = 11;
             // 
             // Keystream_label
@@ -237,7 +237,7 @@
             // 
             this.chiperTextBox.Location = new System.Drawing.Point(101, 371);
             this.chiperTextBox.Name = "chiperTextBox";
-            this.chiperTextBox.Size = new System.Drawing.Size(1117, 22);
+            this.chiperTextBox.Size = new System.Drawing.Size(996, 22);
             this.chiperTextBox.TabIndex = 16;
             // 
             // h_label
@@ -249,26 +249,25 @@
             this.h_label.TabIndex = 17;
             this.h_label.Text = "h(i) = ";
             // 
-            // settingsToolStripMenuItem
+            // Step_button
             // 
-            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.polynomsToolStripMenuItem});
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
-            this.settingsToolStripMenuItem.Text = "Settings";
-            // 
-            // polynomsToolStripMenuItem
-            // 
-            this.polynomsToolStripMenuItem.Name = "polynomsToolStripMenuItem";
-            this.polynomsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.polynomsToolStripMenuItem.Text = "Polynoms";
-            this.polynomsToolStripMenuItem.Click += new System.EventHandler(this.PolynomsToolStripMenuItem_Click);
+            this.Step_button.BackColor = System.Drawing.Color.Aqua;
+            this.Step_button.Enabled = false;
+            this.Step_button.Font = new System.Drawing.Font("Bahnschrift Condensed", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Step_button.Location = new System.Drawing.Point(613, 430);
+            this.Step_button.Name = "Step_button";
+            this.Step_button.Size = new System.Drawing.Size(80, 39);
+            this.Step_button.TabIndex = 18;
+            this.Step_button.Text = "Step";
+            this.Step_button.UseVisualStyleBackColor = false;
+            this.Step_button.Click += new System.EventHandler(this.Step_button_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1230, 481);
+            this.ClientSize = new System.Drawing.Size(1109, 481);
+            this.Controls.Add(this.Step_button);
             this.Controls.Add(this.h_label);
             this.Controls.Add(this.chiperTextBox);
             this.Controls.Add(this.ChiperText_label);
@@ -323,8 +322,7 @@
         private System.Windows.Forms.Label ChiperText_label;
         private System.Windows.Forms.TextBox chiperTextBox;
         private System.Windows.Forms.Label h_label;
-        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem polynomsToolStripMenuItem;
+        private System.Windows.Forms.Button Step_button;
     }
 }
 
