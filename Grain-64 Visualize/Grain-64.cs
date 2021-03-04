@@ -33,16 +33,20 @@ namespace Grain_64_Visualize
             int a=0;
             for (int i = 0; i < s.Count; i++)
             {
-                if (s[i] is Byte)
+                var t = (s[i]).GetType(); 
+                if (s[i] is Int32)
                     if (func == false)
-                        a ^= S((byte)s[i]);
+                        a ^= S(Convert.ToByte(s[i]));
                     else
-                        a ^= B((byte)s[i]);
-                if (s[i] is List<byte>)
+                        a ^= B(Convert.ToByte(s[i]));
+                if (s[i] is List<object>)
                 {
                     int b=0;
-                    for (int j = 0; j < ((List<byte>)s[i]).Count; j++)
-                        b &= B(((List<byte>)s[i])[j]);
+                    for (int j = 0; j < ((List<object>)s[i]).Count; j++)
+                    {
+                        byte x = Convert.ToByte(((List<object>)s[i])[j]);
+                        b &= B(x);
+                    }
                     a ^= b;
                 }
             }
